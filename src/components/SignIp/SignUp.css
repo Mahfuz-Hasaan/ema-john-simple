@@ -1,0 +1,12 @@
+.error{
+    color: red;
+}
+.strong-color{
+    color: green;
+}
+.medium-color{
+    color: rgb(132, 24, 233);
+}
+.weak-color{
+    color: rgb(245, 25, 25);
+}
