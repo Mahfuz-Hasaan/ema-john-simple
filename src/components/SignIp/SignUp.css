@@ -10,3 +10,6 @@
 .weak-color{
     color: rgb(245, 25, 25);
 }
+.success{
+    color: green;
+}

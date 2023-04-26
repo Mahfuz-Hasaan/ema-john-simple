@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './SignUp.css'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProvider';
+
 const SignUp = () => {
     const [error,setError] = useState('');
     const [success,setSuccess] = useState('');
     const [passwordStrength,setPasswordStrength] = useState('');
+    const {createUser} = useContext(AuthContext);
 
     const handleSignUp = event =>{
         event.preventDefault();
-        
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
@@ -17,12 +21,37 @@ const SignUp = () => {
         setError('');
         event.target.reset();
         setPasswordStrength('');
-        if(password != confirm){
-            return setError('Password did not match')
-        }
+
         if(!/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,})/.test(password)){
             return setError('Password must be at least 6 characters,one uppercase,one lowercase,one digit and one special character')
         }
+        if(password != confirm){
+            return setError('Password did not match')
+        }
+
+        createUser(email,password)
+        .then(result => {
+            const loggedUser = result.user;
+            console.log(loggedUser);
+            toast.success('Successfully signed in', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                });
+            form.reset();
+        })
+        .catch(error => {
+            console.log(error);
+            setError(error.message);
+        })
+
+        
+        
     }
     const handlePasswordOnchange = (event) =>{
         const password = event.target.value;
@@ -38,6 +67,7 @@ const SignUp = () => {
         }
     }
     
+
     return (
         <div className='login-form-container'>
             <h2 className='form-title'>Signup</h2>
@@ -59,8 +89,10 @@ const SignUp = () => {
                  </div>
                  <input className='btn-submit' type="submit" value="Signup" />
             </form>
-            <p><Link to="/login">Allready have an account?</Link></p>
+            <p><Link to="/login">Already have an account?</Link></p>
             <p className='error'>{error}</p>
+            <p className='success'>{success}</p>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };
