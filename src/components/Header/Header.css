@@ -19,3 +19,7 @@ nav.header a:hover{
 .color{
     color: white;
 }
+.user-text{
+    color: white;
+    padding: 0px 15px;
+}
