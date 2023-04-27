@@ -76,16 +76,18 @@ const SignUp = () => {
                     <label htmlFor="email">Email</label>
                     <input type="email" name='email' id='email' placeholder='Email' required />
                  </div>
-                 <div className="form-control">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name='password' id='password' placeholder='Password' required onChange={handlePasswordOnchange} />
-                    <p className={passwordStrength === 'Strong password'? 'strong-color' : passwordStrength === 'Medium password' ? 'medium-color' : 'weak-color' }>
-                        {passwordStrength}
-                    </p>
-                 </div>
-                 <div className="form-control">
-                    <label htmlFor="confirm">Confirm Password</label>
-                    <input type="password" name='confirm' id='confirm' placeholder='Confirm Password' required />
+                 <div>
+                    <div className="form-control">
+                        <label htmlFor="password">Password</label>
+                        <input type="password" name='password' id='password' placeholder='Password' required onChange={handlePasswordOnchange} />
+                        <p className={passwordStrength === 'Strong password'? 'strong-color' : passwordStrength === 'Medium password' ? 'medium-color' : 'weak-color' }>
+                            {passwordStrength}
+                        </p>
+                    </div>
+                    <div className="form-control">
+                        <label htmlFor="confirm">Confirm Password</label>
+                        <input type="password" name='confirm' id='confirm' placeholder='Confirm Password' required />
+                    </div>
                  </div>
                  <input className='btn-submit' type="submit" value="Signup" />
             </form>

@@ -7,11 +7,12 @@ import { AuthContext } from '../../providers/AuthProvider';
 
 
 const Login = () => {
+    const [show,setShow] = useState(false);
     const [error,setError] = useState('');
     const {signIn} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-    
+
     const from = location.state?.from?.pathname || '/'
 
     const handleLogin = (event) =>{
@@ -55,7 +56,10 @@ const Login = () => {
                  </div>
                  <div className="form-control">
                     <label htmlFor="password">Password</label>
-                    <input type="password" name='password' id='password' placeholder='Password' required />
+                    <input type={show ? "text" : "password" } name='password' id='password' placeholder='Password' required />
+                    <p className='show' onClick={()=> setShow(!show)}>
+                        {show ? <span>hide password</span>:<span>show password</span>}
+                    </p>
                  </div>
                  <input className='btn-submit' type="submit" value="Login" />
             </form>
